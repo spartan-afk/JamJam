@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { NextResponse } from 'next/server';
 import { generateCodeVerifier, generateCodeChallenge } from '@/backend/lib/pkce';
 import { buildAuthorizeUrl } from '@/backend/lib/spotify';
