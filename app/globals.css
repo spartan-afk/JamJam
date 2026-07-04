@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap');
+
+/* ─── Design tokens ─────────────────────────────────────────── */
+:root {
+  --jam-black:   #0A0A0B;
+  --jam-surface: #151517;
+  --jam-raised:  #1E1E21;
+  --jam-border:  #2A2A2E;
+  --jam-muted:   #8B8B92;
+  --jam-text:    #F2F2F3;
+  --jam-violet:  #8B5CF6;
+  --jam-red:     #FF4D5E;
+}
+
+/* ─── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  height: 100%;
+  background-color: var(--jam-black);
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background-color: var(--jam-black);
+  color: var(--jam-text);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden; /* scroll lives inside the app shell */
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--jam-border); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--jam-muted); }
+
+/* ─── Waveform bars ─────────────────────────────────────────── */
+@keyframes wf1 {
+  0%, 100% { height: 3px;  }
+  50%       { height: 14px; }
+}
+@keyframes wf2 {
+  0%, 100% { height: 10px; }
+  50%       { height: 3px;  }
+}
+@keyframes wf3 {
+  0%, 100% { height: 6px;  }
+  50%       { height: 18px; }
+}
+@keyframes wf4 {
+  0%, 100% { height: 14px; }
+  50%       { height: 5px;  }
+}
+
+.wf-bar { display: inline-block; width: 3px; border-radius: 2px; background: var(--jam-violet); }
+.wf-bar-1 { animation: wf1 1.1s ease-in-out infinite; }
+.wf-bar-2 { animation: wf2 0.95s ease-in-out infinite; animation-delay: 0.08s; }
+.wf-bar-3 { animation: wf3 1.3s ease-in-out infinite; animation-delay: 0.18s; }
+.wf-bar-4 { animation: wf4 1.05s ease-in-out infinite; animation-delay: 0.12s; }
+
+.wf-bar.paused { animation-play-state: paused; height: 3px !important; }
+
+/* ─── Album art radial glow (room view only) ────────────────── */
+.art-glow-wrap {
+  position: relative;
+  z-index: 0;
+}
+.art-glow-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -56px;
+  background: radial-gradient(ellipse at center, rgba(139,92,246,0.22) 0%, transparent 68%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ─── Range input (progress bar) ────────────────────────────── */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  background: var(--jam-border);
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--jam-violet);
+}
+input[type='range']:disabled { opacity: 0.4; cursor: default; }
+
+/* ─── Focus ring ────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--jam-violet);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ─── Utility: live card glow border ────────────────────────── */
+.live-card-border {
+  border-color: rgba(139,92,246,0.40) !important;
+  box-shadow: 0 0 24px rgba(139,92,246,0.12);
+}
